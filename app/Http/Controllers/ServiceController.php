@@ -60,10 +60,10 @@ class ServiceController extends Controller
                 'description' => ['required', 'string'],
                 'price' => ['required','numeric', 'between:0.00,9999.99']
             ]);
-            Service::create(array_merge($request->all(), ['company_id'=> $company]));
+            $temp = Service::create(array_merge($request->all(), ['company_id'=> $company]));
             return response()->json([
-                "data" => $request->all()
-            ]);
+                "data" => array_merge($request->all(), ['id'=> $temp["id"]])
+            ],201);
         } 
         else
         {  

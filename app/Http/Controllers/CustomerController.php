@@ -77,11 +77,11 @@ class CustomerController extends Controller
                     'street' => ['required','string'],
                     'house_number' => ['required','string'],
                 ]);
-                $new_customer = Customer::create(array_merge($request->all(), ['service_id'=> $service]));
+                $temp = $new_customer = Customer::create(array_merge($request->all(), ['service_id'=> $service]));
                 
                 return response()->json([
-                    "data" => $new_customer
-                ]);
+                    "data" => array_merge($request->all(), ['id'=> $temp['id']])
+                ],201);
             }
         }
     }

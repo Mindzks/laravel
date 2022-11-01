@@ -57,11 +57,12 @@ class CompanyController extends Controller
                 'address' => ['required']
             ]);
             //Iterpia i duomenu baze
-            Company::create($request->all());
+            $temp =  Company::create($request->all());
 
             return response()->json([
-                "data" => $request->all()
-            ]);
+                "data" => array_merge($request->all(), ['id'=> $temp["id"]]),
+                "additional" => "empty"
+            ],201);
         }
         else
         {  
